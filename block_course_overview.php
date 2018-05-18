@@ -39,7 +39,12 @@ class block_course_overview extends block_base {
      * Block initialization
      */
     public function init() {
-        $this->title = get_string('title', 'block_course_overview');
+        $installed = core_plugin_manager::instance()->get_plugin_info('block_course_overview')->is_installed_and_upgraded();
+        if (!$installed) {
+            $this->title = get_string('pluginname', 'block_course_overview');
+        } else {
+            $this->title = get_string('title', 'block_course_overview');
+        }
     }
 
     /**
